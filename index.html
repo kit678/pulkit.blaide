@@ -36,18 +36,26 @@
     var menuItems = document.querySelectorAll('.top-menu a');
     var contentSections = document.querySelectorAll('.card-inner');
 
+    function removeActiveClasses() {
+        menuItems.forEach(function(item) {
+            item.parentElement.classList.remove('active');
+        });
+        contentSections.forEach(function(section) {
+            section.classList.remove('active');
+        });
+    }
+
     menuItems.forEach(function(item) {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             var targetId = this.getAttribute('href').replace('#', '');
             var targetSection = document.getElementById(targetId);
 
-            contentSections.forEach(function(section) {
-                section.classList.remove('active');
-            });
+            removeActiveClasses();
 
             if (targetSection) {
                 targetSection.classList.add('active');
+                this.parentElement.classList.add('active');
             }
         });
     });
